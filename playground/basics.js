@@ -1,3 +1,5 @@
+// https://github.com/synergy2411/socgen-node
+
 // Functions : First class citizens in JS
 
 // Function Expression
@@ -64,3 +66,61 @@
 // }, 3000);
 
 // console.log("Program ends")
+
+
+
+// OBJECTS : literal, constructor, instance
+// var user = {
+//     firstName : "Foo",
+//     lastName  : "Bar",
+//     sayHi : function(){
+//         return "Hi " + this.firstName + " " + this.lastName;
+//     }
+// }
+
+// user.middleName = "Bam";
+
+// delete user.middleName;
+
+// console.log(user.sayHi());
+// console.log(user);
+
+
+// Constructor Method (ES5)
+// function Person(fname, lname){
+//     // var this = {};
+//     this.fname = fname;
+//     this.lname = lname;
+//     // return this;
+// }
+
+// Person.prototype.getFullName = function(){
+//     return this.fname + " " +this.lname;
+// }
+
+// var foo = new Person("Foo", "Bar");
+// console.log(foo.getFullName());
+// var baz = new Person("Baz", "Bam");
+
+// var str = "Some string";            // String Constructor
+// console.log(str.length);
+
+
+// Instance Method : JS engine maintains the prototype chaining internally (Object.create())
+
+// var Shoe = {
+//     size : 8,
+//     constuction : "Sneaker"
+// }
+
+// var magicShoe = Object.create(Shoe);
+
+// console.log(Shoe.isPrototypeOf(magicShoe));
+// console.log(magicShoe.isPrototypeOf(Shoe));
+// console.log(Object.prototype.isPrototypeOf(Shoe));
+// console.log(Object.prototype.isPrototypeOf(magicShoe));
+
+
+
+// console.log(magicShoe.size);        // 8
+// console.log(magicShoe);         //  {}
