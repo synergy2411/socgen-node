@@ -57,15 +57,15 @@
 // console.log(tripleNumber);
 // console.log(newArray);
 
-// console.log("Program starts");
+console.log("Program starts");
 
-// // Async code
-// // HOF
-// setTimeout(()=>{
-//     console.log("3 seconds left");
-// }, 3000);
+// Async code
+// HOF
+setTimeout(()=>{
+    console.log("3 seconds left");
+}, 3000);
 
-// console.log("Program ends")
+console.log("Program ends")
 
 
 
