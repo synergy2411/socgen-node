@@ -28,8 +28,33 @@ const addNote = (title, body) => {
   console.log(chalk.green("Note Saved."));
 };
 
-const removeNote = () => {};
-const listNote = () => {};
-const readNote = () => {};
+const removeNote = (title) => {
+    const notes = loadNotes();
+    const noteFound = notes.find(note => note.title === title);
+    if(noteFound){
+        const duplicateNotes = notes.filter(note => note.title !== title);
+        saveNotes(duplicateNotes);
+        console.log(chalk.green("Note deleted.", noteFound));
+    }else{
+        return console.log(chalk.red("Note title not found."))
+    }
+};
+const listNote = () => {
+    const notes = loadNotes();
+    console.log(chalk.blue("My Notes"));
+    notes.forEach(note => {
+        console.log(chalk.blue("Title : " + note.title))
+        console.log(chalk.blue("Body : " + note.body))
+    })
+};
+const readNote = (title) => {
+    const notes = loadNotes();
+    const noteFound = notes.filter(note => note.title === title);
+    if(!noteFound){
+        console.log(chalk.red("Note title not found"));
+    }
+    console.log(chalk.green("Title : " + noteFound[0].title))
+    console.log(chalk.green("Body : " + noteFound[0].body))
+};
 
 module.exports = { addNote, removeNote, listNote, readNote };
