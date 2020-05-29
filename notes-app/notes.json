@@ -1,1 +1,5 @@
-[{"title":"shopping","body":"to buy pulses"},{"title":"plant","body":"pot the plant"},{"title":"insurance","body":"renew the car insurance"}]
+[
+  { "title": "shopping", "body": "to buy pulses" },
+  { "title": "plant", "body": "pot the plant" },
+  { "title": "insurance", "body": "renew the car insurance" }
+]
