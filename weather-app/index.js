@@ -1,5 +1,8 @@
 const express = require("express");
 const environment = require("./environment/environment");
+const geocode = require("./utils/geocode");
+const forecast = require("./utils/forecast");
+
 const app = express();
 
 app.use(express.static(__dirname+"/public"));
@@ -10,8 +13,18 @@ app.get("/", (req, res) => {
 
 app.get("/address", (req, res) => {
     if(req.query && req.query.location){
-        console.log("ADDRESS : ", req.query.location);
-        return res.send({message : "SUCCESS"})
+        geocode.getGeocode(req.query.location, (err, {latitude, longitude, placeName}) => {
+            if(err){
+                return res.send({err});
+            }
+            forecast.getForecast(latitude, longitude, (err, {temperature, summary}) => {
+                if(err) {
+                    return res.send({err})
+                }
+                return res.send({placeName, temperature, summary});
+            })
+        })
+        // return res.send({message : "SUCCESS"})
     }else{
         return res.send({message : "No location found"})
     }
