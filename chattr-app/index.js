@@ -3,8 +3,12 @@ const app = express();
 const http = require("http");
 const server = http.createServer(app);
 const io = require("socket.io")(server);
+const mongo = require("./db/mongo");
 const environment = require("./environment/environment");
+let username = "";
+let messages = [];
 
+mongo.connect();
 app.use(express.static(__dirname+"/public"));
 
 io.on("connection", (client) => {
@@ -15,9 +19,19 @@ io.on("connection", (client) => {
         console.log("Client says : " + data.message);
     })
 
-    client.on("fromClient", ({message}) => {
-        console.log("Client says : " + message);
-        client.emit("fromServer", {message})
+    client.on("fromClient", ({message, username}) => {
+        username = username;
+        messages.push(message);
+        console.log(username  + " : " + message);
+        client.emit("fromServer", {message, username : "Me"});
+        client.broadcast.emit("fromServer", {message, username});
+    })
+
+    client.on("disconnect", reason => {
+        // save all records in database
+        console.log("Client disconnected", reason);
+
+        mongo.insertDocument({username, messages});
     })
 });
 
