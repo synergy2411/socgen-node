@@ -7,8 +7,18 @@ const environment = require("./environment/environment");
 
 app.use(express.static(__dirname+"/public"));
 
-io.on("connection", () => {
-    console.log("Connected...")
+io.on("connection", (client) => {
+    console.log("Connected...");
+    client.emit("acknowledge", {message : "Connected now."});
+
+    client.on("thanks", (data) => {
+        console.log("Client says : " + data.message);
+    })
+
+    client.on("fromClient", ({message}) => {
+        console.log("Client says : " + message);
+        client.emit("fromServer", {message})
+    })
 });
 
 app.get("/", (req, res) => {
