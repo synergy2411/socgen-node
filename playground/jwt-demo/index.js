@@ -5,7 +5,10 @@ const ensureToken = require("./middleware/ensureToken");
 const jwt = require("jsonwebtoken");
 const privateKey = "MY_SECRET_KEY";
 
+// App level middleware
 app.use(bodyParser.json());
+// app.use(ensureToken);
+
 // Open API
 app.get("/api", (req, res) => {});
 
